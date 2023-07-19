@@ -2,7 +2,7 @@
 <ModSyncNinjaData>
   <ID>4d1a80c3-c266-4f0c-affd-57b562338992</ID>
   <ModName>Yayo's Nature (Continued)</ModName>
-  <Version>1.4.0</Version>
+  <Version>1.4.1</Version>
   <SaveBreaking>False</SaveBreaking>
   <Host name="Github">
     <Owner>emipa606</Owner>
@@ -12,7 +12,3 @@
     <Branch>master</Branch>
   </Host>
 </ModSyncNinjaData>
-
-
-
-

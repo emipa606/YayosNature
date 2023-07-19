@@ -1,5 +1,8 @@
 # Changelog for YayosNature
 
+1.4.1 - First publish
+
+
 1.4.0 - First publish.
 Used DeepL to update translations for ChineseSimplified, French, German
 
