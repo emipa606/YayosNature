@@ -1,0 +1,65 @@
+[h1][b]# The colony's biome changes every 60 days. (can edit in option)[/b][/h1]
+- Tile, Animals, plants, temperature change
+- Not destroy : Constructed floors, buildings, anima trees, sea, river, water(option)
+
+[h1][b]# No lag[/b][/h1]
+- It runs smoothly with no lag.
+- Biomes! mod series may cause more lag than other mods when changing.
+- If you are experiencing lag, change the 'change tick' in the options to a larger number. (Instead, Map tiles take longer to change.)
+
+
+[h1][b]# The entire map changes over about 12 days[/b][/h1]
+- This is a real play capture.
+
+[img]https://imgur.com/wXaSiuh.png[/img]
+
+[img]https://imgur.com/kDYv8uV.png[/img]
+
+
+[h1][b]# mountain change(default : off, turn on in option)[/b][/h1]
+[img]https://imgur.com/1hLtpEX.png[/img]
+
+
+
+[url=https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w]>> Yayo's Youtube[/url]
+[url=https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w][img]https://imgur.com/vGVHUDk.png[/img][/url]
+The latest news about my mods are posted on YouTube.
+Subscribe to YouTube and be the first to know.
+
+
+[url=https://ko-fi.com/kr_yayo][img]https://i.imgur.com/d6Vx7Sj.png[/img][/url]
+I'm very erratic and I cannot update this in return for a donation.
+If you'd like to donate for something you're currently enjoying with the mod, I'd appreciate it.
+
+
+
+[h1][b]# Options[/b][/h1]
+- Turn off biomes you don't want.
+
+[img]https://imgur.com/EXRUFRp.png[/img]
+
+
+
+
+
+[h1][b]# Caution![/b][/h1]
+- This mod only supports map size 0x0 to 325x325. (max size in vanilla without devmode)
+- Only biomes that exist on the world map (planet) can appear randomly.
+- When adding a biome mod, it automatically regenerates the planet's biome distribution. (can be turned off in options)
+
+
+[h1][b]# Recommand Mod[/b][/h1]
+
+- Swimming Kit
+https://steamcommunity.com/sharedfiles/filedetails/?id=1542399915
+
+- Alpha Biomes
+https://steamcommunity.com/sharedfiles/filedetails/?id=1841354677
+
+- Advanced Biomes (Continued)
+https://steamcommunity.com/sharedfiles/filedetails/?id=2052116426
+
+
+
+[b]Please take this mod and modify it. The source code is included.
+I'd love to see variations come out with various ideas.[/b]
