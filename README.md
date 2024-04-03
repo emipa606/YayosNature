@@ -38,7 +38,6 @@ Update of YAYOs mod https://steamcommunity.com/sharedfiles/filedetails/?id=25584
 
 
 
-
 https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w] Yayo's Youtube
 https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w]![Image](https://imgur.com/vGVHUDk.png)
 
@@ -46,21 +45,11 @@ The latest news about my mods are posted on YouTube.
 Subscribe to YouTube and be the first to know.
 
 
-https://ko-fi.com/kr_yayo]![Image](https://i.imgur.com/d6Vx7Sj.png)
-
-I'm very erratic and I cannot update this in return for a donation.
-If you'd like to donate for something you're currently enjoying with the mod, I'd appreciate it.
-
-
-
 # **# Options**
 
 - Turn off biomes you don't want.
 
 ![Image](https://imgur.com/EXRUFRp.png)
-
-
-
 
 
 
@@ -84,7 +73,6 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=1841354677
 https://steamcommunity.com/sharedfiles/filedetails/?id=2052116426
 
 
-
 **Please take this mod and modify it. The source code is included.
 I'd love to see variations come out with various ideas.**
 
@@ -94,9 +82,13 @@ I'd love to see variations come out with various ideas.**
 
 -  See if the the error persists if you just have this mod and its requirements active.
 -  If not, try adding your other mods until it happens again.
--  Post your error-log using https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib and command Ctrl+F12
+-  Post your error-log using https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib or the standalone https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404]Uploader and command Ctrl+F12
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
+-  Use https://github.com/RimSort/RimSort/releases/latest]RimSort to sort your mods
 
+
+
+https://steamcommunity.com/sharedfiles/filedetails/changelog/3006875291]![Image](https://img.shields.io/github/v/release/emipa606/YayosNature?label=latest%20version&style=plastic&color=9f1111&labelColor=black)
 

@@ -7,6 +7,7 @@
   <supportedVersions>
     <li>1.3</li>
     <li>1.4</li>
+    <li>1.5</li>
   </supportedVersions>
   <modDependencies>
     <li>
@@ -63,26 +64,16 @@ Update of YAYOs mod https://steamcommunity.com/sharedfiles/filedetails/?id=25584
 [img]https://imgur.com/1hLtpEX.png[/img]
 
 
-
 [url=https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w] Yayo's Youtube[/url]
 [url=https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w][img]https://imgur.com/vGVHUDk.png[/img][/url]
 The latest news about my mods are posted on YouTube.
 Subscribe to YouTube and be the first to know.
 
 
-[url=https://ko-fi.com/kr_yayo][img]https://i.imgur.com/d6Vx7Sj.png[/img][/url]
-I'm very erratic and I cannot update this in return for a donation.
-If you'd like to donate for something you're currently enjoying with the mod, I'd appreciate it.
-
-
-
 [h1][b]# Options[/b][/h1]
 - Turn off biomes you don't want.
 
 [img]https://imgur.com/EXRUFRp.png[/img]
-
-
-
 
 
 [h1][b]# Caution![/b][/h1]
@@ -103,7 +94,6 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=1841354677
 https://steamcommunity.com/sharedfiles/filedetails/?id=2052116426
 
 
-
 [b]Please take this mod and modify it. The source code is included.
 I'd love to see variations come out with various ideas.[/b]
 
@@ -111,9 +101,13 @@ I'd love to see variations come out with various ideas.[/b]
 [list]
 [*] See if the the error persists if you just have this mod and its requirements active.
 [*] If not, try adding your other mods until it happens again.
-[*] Post your error-log using [url=https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib[/url] and command Ctrl+F12
+[*] Post your error-log using [url=https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib[/url] or the standalone [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404]Uploader[/url] and command Ctrl+F12
 [*] For best support, please use the Discord-channel for error-reporting.
 [*] Do not report errors by making a discussion-thread, I get no notification of that.
 [*] If you have the solution for a problem, please post it to the GitHub repository.
-[/list]</description>
+[*] Use [url=https://github.com/RimSort/RimSort/releases/latest]RimSort[/url] to sort your mods
+[/list]
+
+[url=https://steamcommunity.com/sharedfiles/filedetails/changelog/3006875291][img]https://img.shields.io/github/v/release/emipa606/YayosNature?label=latest%20version&amp;style=plastic&amp;color=9f1111&amp;labelColor=black[/img][/url]</description>
+  <modVersion IgnoreIfNoMatchingField="True">1.5.0</modVersion>
 </ModMetaData>

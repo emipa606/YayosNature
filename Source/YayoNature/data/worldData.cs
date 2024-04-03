@@ -11,7 +11,7 @@ public class worldData : IExposable
     private List<BiomeDef> _ar_b;
     private List<float> _ar_b_temp;
 
-    public List<string> biomeDefForCheckChange = new List<string>();
+    public List<string> biomeDefForCheckChange = [];
 
     private int i;
     private List<string> s_ar_b;

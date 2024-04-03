@@ -12,7 +12,7 @@ namespace YayoNature;
 
 public class core : ModBase
 {
-    public static bool using_advBiome;
+    public static readonly bool using_advBiome;
     public static bool val_worldBiome;
     public static bool val_notice;
     public static bool val_changeWater;
@@ -27,13 +27,13 @@ public class core : ModBase
     public static List<BiomeDef> ar_b;
     public static List<float> ar_b_temp;
 
-    public static List<ThingDef> ar_doNotDestroy_thingDefs = new List<ThingDef>();
+    public static readonly List<ThingDef> ar_doNotDestroy_thingDefs = [];
 
 
     public static Dictionary<BiomeDef, SettingHandle<bool>> dic_biomeSetting =
         new Dictionary<BiomeDef, SettingHandle<bool>>();
 
-    public static List<BiomeDef> ar_b_no = new List<BiomeDef>();
+    public static List<BiomeDef> ar_b_no = [];
 
 
     // -----------------------------------------
@@ -41,10 +41,9 @@ public class core : ModBase
 
     public static int tickGame;
 
-
     private static int i;
-    private mapData md;
 
+    private mapData md;
 
     private SettingHandle<int> val_changeCycle_s;
 
@@ -52,19 +51,15 @@ public class core : ModBase
 
     private SettingHandle<bool> val_changeMt_s;
 
-
     private SettingHandle<int> val_changeTick_s;
 
-
     private SettingHandle<bool> val_changeWater_s;
-
 
     private SettingHandle<bool> val_detectMods_s;
 
     private SettingHandle<bool> val_notice_s;
 
     private SettingHandle<bool> val_testMode_s;
-
 
     private SettingHandle<bool> val_worldBiome_s;
 
@@ -146,7 +141,7 @@ public class core : ModBase
         val_testMode = val_testMode_s.Value;
 
 
-        ar_b_no = new List<BiomeDef>();
+        ar_b_no = [];
         foreach (var d in dic_biomeSetting.ToList())
         {
             if (d.Value)
@@ -166,7 +161,7 @@ public class core : ModBase
         var wd = dataUtility.GetData(Current.Game.World);
         var new_biomeDefForCheckChange = (from b2 in DefDatabase<BiomeDef>.AllDefs select b2.defName).ToList();
 
-        if (wd.biomeDefForCheckChange == null || wd.biomeDefForCheckChange.Count <= 0)
+        if (wd.biomeDefForCheckChange is not { Count: > 0 })
         {
             wd.biomeDefForCheckChange = new_biomeDefForCheckChange;
         }
@@ -245,13 +240,13 @@ public class core : ModBase
     {
         var worldGenStepTerrain = new WorldGenStep_Terrain();
         //wg.GenerateFresh(Current.Game.World.info.seedString);
-        var unused = Find.WorldGrid.tiles;
+        _ = Find.WorldGrid.tiles;
 
         foreach (var t in Find.WorldGrid.tiles)
         {
             i = Find.WorldGrid.tiles.IndexOf(t);
             t.biome = AccessTools.Method(typeof(WorldGenStep_Terrain), "BiomeFrom")
-                .Invoke(worldGenStepTerrain, new object[] { t, i }) as BiomeDef;
+                .Invoke(worldGenStepTerrain, [t, i]) as BiomeDef;
         }
 
         dataUtility.GetData(Current.Game.World).ar_b = null;

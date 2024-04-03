@@ -53,7 +53,7 @@ public static class GenRadial
         ManualRadialPattern = new IntVec3[49];
         RadialPattern = new IntVec3[RadialPatternCount];
         RadialPatternRadii = new float[RadialPatternCount];
-        tmpCells = new List<IntVec3>();
+        tmpCells = [];
         working = false;
         SetupManualRadialPattern();
         SetupRadialPattern();
@@ -195,7 +195,7 @@ public static class GenRadial
     {
         if (radius >= MaxRadialPatternRadius)
         {
-            Log.Error("Not enough squares to get to radius " + radius + ". Max is " + MaxRadialPatternRadius);
+            Log.Error($"Not enough squares to get to radius {radius}. Max is {MaxRadialPatternRadius}");
             return RadialPatternCount;
         }
 
@@ -215,7 +215,7 @@ public static class GenRadial
     {
         if (radius >= MaxRadialPatternRadius)
         {
-            Log.Error("Not enough squares to get to radius " + radius + ". Max is " + MaxRadialPatternRadius);
+            Log.Error($"Not enough squares to get to radius {radius}. Max is {MaxRadialPatternRadius}");
             return RadialPatternCount;
         }
 
@@ -236,7 +236,7 @@ public static class GenRadial
         radius = (radius / Mathf.Cos(0.785398f) / 2) + 7f;
         if (radius >= MaxRadialPatternRadius)
         {
-            Log.Error("Not enough squares to get to radius " + radius + ". Max is " + MaxRadialPatternRadius);
+            Log.Error($"Not enough squares to get to radius {radius}. Max is {MaxRadialPatternRadius}");
             return RadialPatternCount;
         }
 
@@ -306,15 +306,13 @@ public static class GenRadial
                 {
                     if (returnedThings == null)
                     {
-                        returnedThings = new HashSet<Thing>();
+                        returnedThings = [];
                     }
 
-                    if (returnedThings.Contains(thing))
+                    if (!returnedThings.Add(thing))
                     {
                         continue;
                     }
-
-                    returnedThings.Add(thing);
                 }
 
                 yield return thing;

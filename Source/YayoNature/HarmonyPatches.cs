@@ -8,7 +8,6 @@ public class HarmonyPatches : Mod
 {
     public HarmonyPatches(ModContentPack content) : base(content)
     {
-        var harmony = new Harmony("com.yayo.nature");
-        harmony.PatchAll(Assembly.GetExecutingAssembly());
+        new Harmony("com.yayo.nature").PatchAll(Assembly.GetExecutingAssembly());
     }
 }

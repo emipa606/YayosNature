@@ -20,9 +20,9 @@ public class mapData : IExposable
     public BiomeDef _prev_biome;
 
 
-    private List<float> ar_elevation = new List<float>();
-    private List<float> ar_fertility = new List<float>();
-    private List<RoofThreshold> ar_roof = new List<RoofThreshold>();
+    private List<float> ar_elevation = [];
+    private List<float> ar_fertility = [];
+    private List<RoofThreshold> ar_roof = [];
     private IntVec3 c = new IntVec3(0, 0, 0);
 
 
@@ -240,12 +240,12 @@ public class mapData : IExposable
 
         if (ar_elevation == null)
         {
-            ar_elevation = new List<float>();
+            ar_elevation = [];
         }
 
         if (ar_fertility == null)
         {
-            ar_fertility = new List<float>();
+            ar_fertility = [];
         }
     }
 
@@ -323,10 +323,10 @@ public class mapData : IExposable
         gs_elevationFertility.def?.genStep.Generate(m, gs_elevationFertility.parms);
 
         fertility =
-            AccessTools.PropertyGetter(typeof(MapGenerator), "Fertility").Invoke(null, new object[] { }) as
+            AccessTools.PropertyGetter(typeof(MapGenerator), "Fertility").Invoke(null, []) as
                 MapGenFloatGrid;
         elevation =
-            AccessTools.PropertyGetter(typeof(MapGenerator), "Elevation").Invoke(null, new object[] { }) as
+            AccessTools.PropertyGetter(typeof(MapGenerator), "Elevation").Invoke(null, []) as
                 MapGenFloatGrid;
     }
 
@@ -389,7 +389,7 @@ public class mapData : IExposable
             RockNoises.Init(m);
 
             var num = 0.7f;
-            ar_roof = new List<RoofThreshold>();
+            ar_roof = [];
             var roofThreshold = new RoofThreshold
             {
                 roofDef = RoofDefOf.RoofRockThick,
@@ -433,7 +433,7 @@ public class mapData : IExposable
             genStep_ScatterLumpsMineable.warnOnFail = false;
             //int num4 = genStep_ScatterLumpsMineable.CalculateFinalCount(m);
             if (AccessTools.Method(typeof(GenStep_Scatterer), "CalculateFinalCount")
-                    .Invoke(genStep_ScatterLumpsMineable, new object[] { m }) is int num4)
+                    .Invoke(genStep_ScatterLumpsMineable, [m]) is int num4)
             {
                 for (var index = 0; index < (int?)num4; index++)
                 {
@@ -671,7 +671,7 @@ public class mapData : IExposable
 
         if (newTerr == null)
         {
-            Log.Error(string.Concat("Tried to set terrain at ", intVec3, " to null."));
+            Log.Error($"Tried to set terrain at {intVec3} to null.");
             return;
         }
 
@@ -730,7 +730,7 @@ public class mapData : IExposable
 
     private void DoTerrainChangedEffects(IntVec3 intVec3, Map map)
     {
-        map.mapDrawer.MapMeshDirty(intVec3, MapMeshFlag.Terrain, true, false);
+        map.mapDrawer.MapMeshDirty(intVec3, MapMeshFlagDefOf.Terrain, true, false);
         var thingList = intVec3.GetThingList(map);
         for (var num = thingList.Count - 1; num >= 0; num--)
         {
@@ -945,7 +945,7 @@ public class mapData : IExposable
             return thingDef;
         }
 
-        Log.ErrorOnce("Did not get rock def to generate at " + c, 50812);
+        Log.ErrorOnce($"Did not get rock def to generate at {c}", 50812);
         thingDef = ThingDefOf.Sandstone;
 
         return thingDef;

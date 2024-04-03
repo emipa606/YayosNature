@@ -4,8 +4,7 @@ using Verse;
 
 namespace YayoNature;
 
-[HarmonyPatch(typeof(WorldObjectsHolder))]
-[HarmonyPatch("Add")]
+[HarmonyPatch(typeof(WorldObjectsHolder), nameof(WorldObjectsHolder.Add))]
 public class patch_WorldObjectsHolder_Add
 {
     private static void Postfix(WorldObject o)

@@ -6,7 +6,7 @@ using Verse;
 
 namespace YayoNature;
 
-[HarmonyPatch(typeof(WildPlantSpawner), "CheckSpawnWildPlantAt")]
+[HarmonyPatch(typeof(WildPlantSpawner), nameof(WildPlantSpawner.CheckSpawnWildPlantAt))]
 internal class Patch_WildPlantSpawner_CheckSpawnWildPlantAt
 {
     private static Map map;
@@ -31,9 +31,9 @@ internal class Patch_WildPlantSpawner_CheckSpawnWildPlantAt
 
     [HarmonyPrefix]
     private static bool Prefix(WildPlantSpawner __instance, ref bool __result, IntVec3 c, float plantDensity,
-        float wholeMapNumDesiredPlants)
+        float wholeMapNumDesiredPlants, Map ___map)
     {
-        map = Traverse.Create(__instance).Field("map").GetValue<Map>();
+        map = ___map;
         md = dataUtility.GetData(map);
         if (md.change)
         {
@@ -59,16 +59,16 @@ internal class Patch_WildPlantSpawner_CheckSpawnWildPlantAt
         }
 
         var cavePlants = (bool)AccessTools.Method(typeof(WildPlantSpawner), "GoodRoofForCavePlant")
-            .Invoke(__instance, new object[] { c });
+            .Invoke(__instance, [c]);
         if ((bool)AccessTools.Method(typeof(WildPlantSpawner), "SaturatedAt").Invoke(__instance,
-                new object[] { c, plantDensity, cavePlants, wholeMapNumDesiredPlants }))
+                [c, plantDensity, cavePlants, wholeMapNumDesiredPlants]))
         {
             __result = false;
             return false;
         }
 
         AccessTools.Method(typeof(WildPlantSpawner), "CalculatePlantsWhichCanGrowAt").Invoke(__instance,
-            new object[] { c, tmpPossiblePlants, cavePlants, plantDensity });
+            [c, tmpPossiblePlants, cavePlants, plantDensity]);
         if (!tmpPossiblePlants.Any())
         {
             __result = false;
@@ -76,13 +76,12 @@ internal class Patch_WildPlantSpawner_CheckSpawnWildPlantAt
         }
 
         AccessTools.Method(typeof(WildPlantSpawner), "CalculateDistancesToNearbyClusters")
-            .Invoke(__instance, new object[] { c });
+            .Invoke(__instance, [c]);
         tmpPossiblePlantsWithWeight.Clear();
         foreach (var thingDef in tmpPossiblePlants)
         {
             var value = (float)AccessTools.Method(typeof(WildPlantSpawner), "PlantChoiceWeight").Invoke(__instance,
-                new object[]
-                    { thingDef, c, distanceSqToNearbyClusters, wholeMapNumDesiredPlants, plantDensity });
+                [thingDef, c, distanceSqToNearbyClusters, wholeMapNumDesiredPlants, plantDensity]);
             tmpPossiblePlantsWithWeight.Add(new KeyValuePair<ThingDef, float>(thingDef, value));
         }
 
