@@ -11,23 +11,8 @@ internal class Patch_WildPlantSpawner_CheckSpawnWildPlantAt
 {
     private static Map map;
     private static mapData md;
-
-    private static readonly List<ThingDef> tmpPossiblePlants = AccessTools
-        .StaticFieldRefAccess<List<ThingDef>>(AccessTools.Field(typeof(WildPlantSpawner), "tmpPossiblePlants"))
-        .Invoke();
-
-    private static readonly List<KeyValuePair<ThingDef, float>> tmpPossiblePlantsWithWeight =
-        AccessTools.StaticFieldRefAccess<List<KeyValuePair<ThingDef, float>>>(
-            AccessTools.Field(typeof(WildPlantSpawner), "tmpPossiblePlantsWithWeight")).Invoke();
-
-    private static readonly Dictionary<ThingDef, float> distanceSqToNearbyClusters = AccessTools
-        .StaticFieldRefAccess<Dictionary<ThingDef, float>>(AccessTools.Field(typeof(WildPlantSpawner),
-            "distanceSqToNearbyClusters")).Invoke();
-
-    private static FloatRange InitialGrowthRandomRange = AccessTools
-        .StaticFieldRefAccess<FloatRange>(AccessTools.Field(typeof(WildPlantSpawner), "InitialGrowthRandomRange"))
-        .Invoke();
-
+    
+    
 
     [HarmonyPrefix]
     private static bool Prefix(WildPlantSpawner __instance, ref bool __result, IntVec3 c, float plantDensity,
@@ -58,34 +43,30 @@ internal class Patch_WildPlantSpawner_CheckSpawnWildPlantAt
             return false;
         }
 
-        var cavePlants = (bool)AccessTools.Method(typeof(WildPlantSpawner), "GoodRoofForCavePlant")
-            .Invoke(__instance, [c]);
-        if ((bool)AccessTools.Method(typeof(WildPlantSpawner), "SaturatedAt").Invoke(__instance,
-                [c, plantDensity, cavePlants, wholeMapNumDesiredPlants]))
+        var cavePlants = __instance.GoodRoofForCavePlant(c);
+        if (__instance.SaturatedAt(c, plantDensity, cavePlants, wholeMapNumDesiredPlants))
         {
             __result = false;
             return false;
         }
 
-        AccessTools.Method(typeof(WildPlantSpawner), "CalculatePlantsWhichCanGrowAt").Invoke(__instance,
-            [c, tmpPossiblePlants, cavePlants, plantDensity]);
-        if (!tmpPossiblePlants.Any())
+        
+        __instance.CalculatePlantsWhichCanGrowAt(c, WildPlantSpawner.tmpPossiblePlants, cavePlants, plantDensity);
+        if (!WildPlantSpawner.tmpPossiblePlants.Any())
         {
             __result = false;
             return false;
         }
 
-        AccessTools.Method(typeof(WildPlantSpawner), "CalculateDistancesToNearbyClusters")
-            .Invoke(__instance, [c]);
-        tmpPossiblePlantsWithWeight.Clear();
-        foreach (var thingDef in tmpPossiblePlants)
+        __instance.CalculateDistancesToNearbyClusters(c);
+        WildPlantSpawner.tmpPossiblePlantsWithWeight.Clear();
+        foreach (var thingDef in WildPlantSpawner.tmpPossiblePlants)
         {
-            var value = (float)AccessTools.Method(typeof(WildPlantSpawner), "PlantChoiceWeight").Invoke(__instance,
-                [thingDef, c, distanceSqToNearbyClusters, wholeMapNumDesiredPlants, plantDensity]);
-            tmpPossiblePlantsWithWeight.Add(new KeyValuePair<ThingDef, float>(thingDef, value));
+            var value = __instance.PlantChoiceWeight(thingDef, c, WildPlantSpawner.distanceSqToNearbyClusters, wholeMapNumDesiredPlants, plantDensity);
+            WildPlantSpawner.tmpPossiblePlantsWithWeight.Add(new KeyValuePair<ThingDef, float>(thingDef, value));
         }
 
-        if (!tmpPossiblePlantsWithWeight.TryRandomElementByWeight(x => x.Value, out var result))
+        if (!WildPlantSpawner.tmpPossiblePlantsWithWeight.TryRandomElementByWeight(x => x.Value, out var result))
         {
             __result = false;
             return false;

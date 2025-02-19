@@ -27,13 +27,13 @@ public class core : ModBase
     public static List<BiomeDef> ar_b;
     public static List<float> ar_b_temp;
 
-    public static readonly List<ThingDef> ar_doNotDestroy_thingDefs = [];
+    public static readonly List<ThingDef> ar_doNotDestroy_thingDefs = new List<ThingDef>();
 
 
     public static Dictionary<BiomeDef, SettingHandle<bool>> dic_biomeSetting =
         new Dictionary<BiomeDef, SettingHandle<bool>>();
 
-    public static List<BiomeDef> ar_b_no = [];
+    public static List<BiomeDef> ar_b_no = new List<BiomeDef>();
 
 
     // -----------------------------------------
@@ -141,7 +141,7 @@ public class core : ModBase
         val_testMode = val_testMode_s.Value;
 
 
-        ar_b_no = [];
+        ar_b_no = new List<BiomeDef>();
         foreach (var d in dic_biomeSetting.ToList())
         {
             if (d.Value)
@@ -245,8 +245,7 @@ public class core : ModBase
         foreach (var t in Find.WorldGrid.tiles)
         {
             i = Find.WorldGrid.tiles.IndexOf(t);
-            t.biome = AccessTools.Method(typeof(WorldGenStep_Terrain), "BiomeFrom")
-                .Invoke(worldGenStepTerrain, [t, i]) as BiomeDef;
+            t.biome = worldGenStepTerrain.BiomeFrom(t, i);
         }
 
         dataUtility.GetData(Current.Game.World).ar_b = null;
@@ -258,8 +257,7 @@ public class core : ModBase
 
         if (render)
         {
-            (Traverse.Create(Find.World.renderer).Field("layers").GetValue<List<WorldLayer>>()
-                .Find(a => a is WorldLayer_Terrain) as WorldLayer_Terrain)?.RegenerateNow();
+            (Find.World.renderer.layers.Find(a => a is WorldLayer_Terrain) as WorldLayer_Terrain)?.RegenerateNow();
         }
         //Current.Game.World.renderer.RegenerateAllLayersNow();
 
