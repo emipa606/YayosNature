@@ -4,10 +4,10 @@ using RimWorld.Planet;
 namespace YayoNature;
 
 [HarmonyPatch(typeof(World), nameof(World.ExposeData))]
-public class patch_World_exposeData
+public class World_ExposeData
 {
     private static void Postfix(World __instance)
     {
-        dataUtility.GetData(__instance).ExposeData();
+        DataUtility.GetData(__instance).ExposeData();
     }
 }

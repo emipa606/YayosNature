@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using HarmonyLib;
 using HugsLib;
 using HugsLib.Settings;
 using RimWorld;
@@ -10,7 +9,7 @@ using Verse;
 
 namespace YayoNature;
 
-public class core : ModBase
+public class Core : ModBase
 {
     public static readonly bool using_advBiome;
     public static bool val_worldBiome;
@@ -27,13 +26,13 @@ public class core : ModBase
     public static List<BiomeDef> ar_b;
     public static List<float> ar_b_temp;
 
-    public static readonly List<ThingDef> ar_doNotDestroy_thingDefs = new List<ThingDef>();
+    public static readonly List<ThingDef> ar_doNotDestroy_thingDefs = [];
 
 
     public static Dictionary<BiomeDef, SettingHandle<bool>> dic_biomeSetting =
         new Dictionary<BiomeDef, SettingHandle<bool>>();
 
-    public static List<BiomeDef> ar_b_no = new List<BiomeDef>();
+    public static List<BiomeDef> ar_b_no = [];
 
 
     // -----------------------------------------
@@ -63,7 +62,7 @@ public class core : ModBase
 
     private SettingHandle<bool> val_worldBiome_s;
 
-    static core()
+    static Core()
     {
         if (!ModsConfig.ActiveModsInLoadOrder.Any(mod =>
                 mod.PackageId.ToLower().Contains("Mlie.AdvancedBiomes".ToLower())))
@@ -141,7 +140,7 @@ public class core : ModBase
         val_testMode = val_testMode_s.Value;
 
 
-        ar_b_no = new List<BiomeDef>();
+        ar_b_no = [];
         foreach (var d in dic_biomeSetting.ToList())
         {
             if (d.Value)
@@ -158,7 +157,7 @@ public class core : ModBase
     {
         base.WorldLoaded();
 
-        var wd = dataUtility.GetData(Current.Game.World);
+        var wd = DataUtility.GetData(Current.Game.World);
         var new_biomeDefForCheckChange = (from b2 in DefDatabase<BiomeDef>.AllDefs select b2.defName).ToList();
 
         if (wd.biomeDefForCheckChange is not { Count: > 0 })
@@ -208,7 +207,7 @@ public class core : ModBase
     public static void trySetRandomBiomeForAllBase(bool forced = false)
     {
         // 모든 베이스 랜덤 바이옴
-        var wd = dataUtility.GetData(Current.Game.World);
+        var wd = DataUtility.GetData(Current.Game.World);
         if (!val_worldBiome || !forced && wd.worldRandomSetuped)
         {
             return;
@@ -239,7 +238,6 @@ public class core : ModBase
     public static void resetPlanet(bool render = false)
     {
         var worldGenStepTerrain = new WorldGenStep_Terrain();
-        //wg.GenerateFresh(Current.Game.World.info.seedString);
         _ = Find.WorldGrid.tiles;
 
         foreach (var t in Find.WorldGrid.tiles)
@@ -248,10 +246,10 @@ public class core : ModBase
             t.biome = worldGenStepTerrain.BiomeFrom(t, i);
         }
 
-        dataUtility.GetData(Current.Game.World).ar_b = null;
-        ar_b = dataUtility.GetData(Current.Game.World).ar_b;
-        dataUtility.GetData(Current.Game.World).ar_b_temp = null;
-        ar_b_temp = dataUtility.GetData(Current.Game.World).ar_b_temp;
+        DataUtility.GetData(Current.Game.World).ar_b = null;
+        ar_b = DataUtility.GetData(Current.Game.World).ar_b;
+        DataUtility.GetData(Current.Game.World).ar_b_temp = null;
+        ar_b_temp = DataUtility.GetData(Current.Game.World).ar_b_temp;
 
         trySetRandomBiomeForAllBase(true);
 
@@ -259,7 +257,6 @@ public class core : ModBase
         {
             (Find.World.renderer.layers.Find(a => a is WorldLayer_Terrain) as WorldLayer_Terrain)?.RegenerateNow();
         }
-        //Current.Game.World.renderer.RegenerateAllLayersNow();
 
 
         foreach (var m in Find.Maps)
@@ -269,7 +266,7 @@ public class core : ModBase
                 continue;
             }
 
-            var md = dataUtility.GetData(m);
+            var md = DataUtility.GetData(m);
             md.ar_b = null;
         }
     }
@@ -277,8 +274,6 @@ public class core : ModBase
     public override void Tick(int currentTick)
     {
         tickGame = Find.TickManager.TicksGame;
-        //Log.Message($"tickSeed Random : {Rand.RangeSeeded(0.1f, 0.9f, tickGame)}");
-        //Log.Message($"worldSeed Random : {Rand.RangeSeeded(0.1f, 0.9f, Find.World.ConstantRandSeed)}");
 
 
         // 첫 사이클 건너뛰기
@@ -293,7 +288,7 @@ public class core : ModBase
             {
                 if (m.IsPlayerHome)
                 {
-                    dataUtility.GetData(m).noticeNextBiome();
+                    DataUtility.GetData(m).noticeNextBiome();
                 }
             }
         }
@@ -306,11 +301,11 @@ public class core : ModBase
                 continue;
             }
 
-            md = dataUtility.GetData(m);
+            md = DataUtility.GetData(m);
             if (md.nextStartChangeTick == tickGame)
             {
                 // 변화 시작
-                dataUtility.GetData(m).startChange();
+                DataUtility.GetData(m).startChange();
             }
             else if (md.nextStartChangeTick < tickGame)
             {
@@ -321,7 +316,7 @@ public class core : ModBase
             if (tickGame % val_changeTick == 0)
             {
                 // 맵 틱
-                dataUtility.dic_map[m].doTick();
+                DataUtility.dic_map[m].doTick();
             }
         }
     }
@@ -335,7 +330,6 @@ public class core : ModBase
     {
         tile.temperature = getBiomeTemp(tile.biome);
     }
-
 
     public static BiomeDef getRandomBiome()
     {

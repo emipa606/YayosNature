@@ -5,11 +5,11 @@ using Verse;
 namespace YayoNature;
 
 [HarmonyPatch(typeof(WorldObjectsHolder), nameof(WorldObjectsHolder.Add))]
-public class patch_WorldObjectsHolder_Add
+public class WorldObjectsHolder_Add
 {
     private static void Postfix(WorldObject o)
     {
-        if (!core.val_worldBiome || Current.ProgramState != ProgramState.Playing)
+        if (!Core.val_worldBiome || Current.ProgramState != ProgramState.Playing)
         {
             return;
         }
@@ -19,8 +19,8 @@ public class patch_WorldObjectsHolder_Add
             return;
         }
 
-        var b = core.getRandomBiome();
+        var b = Core.getRandomBiome();
         Find.WorldGrid[o.Tile].biome = b;
-        Find.WorldGrid[o.Tile].temperature = core.getBiomeTemp(b);
+        Find.WorldGrid[o.Tile].temperature = Core.getBiomeTemp(b);
     }
 }

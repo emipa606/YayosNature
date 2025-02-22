@@ -1,21 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputPath>..\..\1.5\Assemblies</OutputPath>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>net481</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <DebugType>None</DebugType>
     <LangVersion>latest</LangVersion>
-    <FileVersion>1.5.0</FileVersion>
+    <FileVersion>1.5.1</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Publicizer">
-      <Version>2.3.0</Version>
+      <Version>*</Version>
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Krafs.Rimworld.Ref">
-      <Version>1.5.4053-beta</Version>
+      <Version>*</Version>
       <ExcludeAssets>runtime</ExcludeAssets>
       <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -32,6 +32,21 @@
       <CopyLocal>False</CopyLocal>
       <Private>false</Private>
     </Reference>
-    <Publicize Include="Assembly-CSharp"/>
+    <Publicize Include="Assembly-CSharp:RimWorld.Planet.WorldGenStep_Terrain.BiomeFrom" />
+    <Publicize Include="Assembly-CSharp:RimWorld.Planet.WorldRenderer.layers" />
+    <Publicize Include="Assembly-CSharp:Verse.GenStep_Scatterer.CalculateFinalCount" />
+    <Publicize Include="Assembly-CSharp:Verse.TerrainGrid.underGrid" />
+    <Publicize Include="Assembly-CSharp:Verse.TerrainGrid.drawerInt" />
+    <Publicize Include="Assembly-CSharp:RimWorld.WildPlantSpawner.GoodRoofForCavePlant" />
+    <Publicize Include="Assembly-CSharp:RimWorld.WildPlantSpawner.SaturatedAt" />
+    <Publicize Include="Assembly-CSharp:RimWorld.WildPlantSpawner.CalculatePlantsWhichCanGrowAt" />
+    <Publicize Include="Assembly-CSharp:RimWorld.WildPlantSpawner.tmpPossiblePlantsWithWeight" />
+    <Publicize Include="Assembly-CSharp:RimWorld.WildPlantSpawner.tmpPossiblePlants" />
+    <Publicize Include="Assembly-CSharp:RimWorld.WildPlantSpawner.PlantChoiceWeight" />
+    <Publicize Include="Assembly-CSharp:RimWorld.WildPlantSpawner.CalculateDistancesToNearbyClusters" />
+    <Publicize Include="Assembly-CSharp:RimWorld.WildPlantSpawner.distanceSqToNearbyClusters" />
   </ItemGroup>
+  <PropertyGroup>
+    <PublicizerClearCacheOnClean>true</PublicizerClearCacheOnClean>
+  </PropertyGroup>
 </Project>

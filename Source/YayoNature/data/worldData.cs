@@ -11,13 +11,12 @@ public class worldData : IExposable
     private List<BiomeDef> _ar_b;
     private List<float> _ar_b_temp;
 
-    public List<string> biomeDefForCheckChange = new List<string>();
+    public List<string> biomeDefForCheckChange = [];
 
     private int i;
     private List<string> s_ar_b;
 
     private List<string> s_ar_b_temp;
-    private World w;
     public bool worldRandomSetuped;
 
     public List<BiomeDef> ar_b
@@ -76,7 +75,6 @@ public class worldData : IExposable
 
     public void setParent(World _w)
     {
-        w = _w;
     }
 
 
@@ -129,7 +127,7 @@ public class worldData : IExposable
             ar_tmp[i] /= count;
         }
 
-        if (!core.val_testMode)
+        if (!Core.val_testMode)
         {
             return ar_tmp;
         }

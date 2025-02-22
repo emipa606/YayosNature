@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using ActiveTerrain;
-using HarmonyLib;
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
@@ -10,7 +9,7 @@ using Verse;
 
 namespace YayoNature;
 
-public class mapData : IExposable
+public sealed class mapData : IExposable
 {
     public readonly Dictionary<IntVec3, ThingDef> dic_c_thing = new Dictionary<IntVec3, ThingDef>();
     private readonly float maxMineableValue = float.MaxValue;
@@ -20,9 +19,9 @@ public class mapData : IExposable
     public BiomeDef _prev_biome;
 
 
-    private List<float> ar_elevation = new List<float>();
-    private List<float> ar_fertility = new List<float>();
-    private List<RoofThreshold> ar_roof = new List<RoofThreshold>();
+    private List<float> ar_elevation = [];
+    private List<float> ar_fertility = [];
+    private List<RoofThreshold> ar_roof = [];
     private IntVec3 c = new IntVec3(0, 0, 0);
 
 
@@ -238,8 +237,15 @@ public class mapData : IExposable
             return;
         }
 
-        if (ar_elevation == null) ar_elevation = new List<float>();
-        if (ar_fertility == null) ar_fertility = new List<float>();
+        if (ar_elevation == null)
+        {
+            ar_elevation = [];
+        }
+
+        if (ar_fertility == null)
+        {
+            ar_fertility = [];
+        }
     }
 
     public void setParent(Map _m)
@@ -279,7 +285,7 @@ public class mapData : IExposable
         }
 
         prev_temp = m.TileInfo.temperature;
-        target_temp = core.getBiomeTemp(m.TileInfo.biome);
+        target_temp = Core.getBiomeTemp(m.TileInfo.biome);
         tick = 0;
         tickLength = GenRadial.RadialPattern_r_length - rpStartIndex;
         reset_dic_c_gen();
@@ -291,7 +297,7 @@ public class mapData : IExposable
         //prev_biome.baseWeatherCommonalities[0].weather.
 
 
-        if (core.val_notice)
+        if (Core.val_notice)
         {
             Find.LetterStack.ReceiveLetter(
                 "biomeChangeStart_t".Translate(),
@@ -322,11 +328,11 @@ public class mapData : IExposable
 
     public void check_nextStartChangeTick()
     {
-        if (nextStartChangeTick < core.tickGame)
+        if (nextStartChangeTick < Core.tickGame)
         {
             nextStartChangeTick += Mathf.Max(1,
-                core.val_changeCycle + Rand.RangeSeeded(-core.val_changeCycleRandom, core.val_changeCycleRandom + 1,
-                    Find.World.ConstantRandSeed + core.tickGame)) * GenDate.TicksPerDay;
+                Core.val_changeCycle + Rand.RangeSeeded(-Core.val_changeCycleRandom, Core.val_changeCycleRandom + 1,
+                    Find.World.ConstantRandSeed + Core.tickGame)) * GenDate.TicksPerDay;
         }
     }
 
@@ -342,7 +348,7 @@ public class mapData : IExposable
             m.wildPlantSpawner.WildPlantSpawnerTick();
         }
         */
-        if (core.val_notice)
+        if (Core.val_notice)
         {
             noticeNextBiome();
         }
@@ -355,7 +361,7 @@ public class mapData : IExposable
             string.Format("biomeComingSoon_d".Translate(),
                 m.TileInfo.feature.name,
                 getNextBiome().label.Colorize(Color.magenta),
-                $"{Mathf.Max(1, core.val_changeCycle - core.val_changeCycleRandom)}~{core.val_changeCycle + core.val_changeCycleRandom}",
+                $"{Mathf.Max(1, Core.val_changeCycle - Core.val_changeCycleRandom)}~{Core.val_changeCycle + Core.val_changeCycleRandom}",
                 $"- {getNextBiome().label} -\n\n{getNextBiome().description}"),
             LetterDefOf.NeutralEvent
         );
@@ -378,7 +384,7 @@ public class mapData : IExposable
             RockNoises.Init(m);
 
             var num = 0.7f;
-            ar_roof = new List<RoofThreshold>();
+            ar_roof = [];
             var roofThreshold = new RoofThreshold
             {
                 roofDef = RoofDefOf.RoofRockThick,
@@ -420,7 +426,7 @@ public class mapData : IExposable
             genStep_ScatterLumpsMineable.countPer10kCellsRange = new FloatRange(num3, num3);
             genStep_ScatterLumpsMineable.minSpacing = 5f;
             genStep_ScatterLumpsMineable.warnOnFail = false;
-            int num4 = genStep_ScatterLumpsMineable.CalculateFinalCount(m);
+            var num4 = genStep_ScatterLumpsMineable.CalculateFinalCount(m);
             {
                 for (var index = 0; index < (int?)num4; index++)
                 {
@@ -481,7 +487,7 @@ public class mapData : IExposable
         }
 
         // 물타일 변경금지
-        if (!core.val_changeWater && c_water)
+        if (!Core.val_changeWater && c_water)
         {
             return;
         }
@@ -500,7 +506,7 @@ public class mapData : IExposable
         terrainDef = null;
 
 
-        if (core.val_changeMt)
+        if (Core.val_changeMt)
         {
             // 산지붕 변경
             if (c.GetRoof(m) != null && c.GetRoof(m).isNatural && c.GetRoof(m).isThickRoof)
@@ -535,10 +541,10 @@ public class mapData : IExposable
 
         // 타일 결정
         terrainDef = getTerrainDef(m, c, edifice, elevation, fertility, caves);
-        if (!core.val_changeWater && terrainDef.IsWater)
+        if (!Core.val_changeWater && terrainDef.IsWater)
         {
             terrainDef = TerrainThreshold.TerrainAtValue(m.Biome.terrainsByFertility, fertility[c]);
-            if (core.val_testMode)
+            if (Core.val_testMode)
             {
                 Log.Message($"target terrain is water -> {terrainDef.label}");
             }
@@ -558,7 +564,7 @@ public class mapData : IExposable
 
         // 식물 제거
         plant = c.GetPlant(m);
-        if (plant != null && (c.Impassable(m) || !core.ar_doNotDestroy_thingDefs.Contains(plant.def) && !plant.IsCrop))
+        if (plant != null && (c.Impassable(m) || !Core.ar_doNotDestroy_thingDefs.Contains(plant.def) && !plant.IsCrop))
         {
             plant.Destroy();
         }
@@ -566,7 +572,7 @@ public class mapData : IExposable
 
         // 식물 생성
         var progress = (float)(i - rpStartIndex) / (GenRadial.RadialPattern_r_length - rpStartIndex);
-        if (progress > 0.85f && !Rand.ChanceSeeded(0.001f, core.tickGame))
+        if (progress > 0.85f && !Rand.ChanceSeeded(0.001f, Core.tickGame))
         {
             i = Mathf.RoundToInt(150 * progress);
             for (j = 0; j < i; j++)
@@ -623,7 +629,7 @@ public class mapData : IExposable
             return TerrainDefOf.Gravel;
         }
 
-        if (core.val_changeMt && elevationValue >= 0.61f)
+        if (Core.val_changeMt && elevationValue >= 0.61f)
         {
             return RockDefAt(intVec3).building.naturalTerrain;
         }
@@ -635,7 +641,7 @@ public class mapData : IExposable
 
     public void SetTerrain(IntVec3 intVec3, TerrainDef newTerr, Map map, TerrainDef[] topGrid, TerrainDef[] underGrid)
     {
-        if (core.using_advBiome)
+        if (Core.using_advBiome)
         {
             try
             {
@@ -691,7 +697,7 @@ public class mapData : IExposable
         DoTerrainChangedEffects(intVec3, map);
 
 
-        if (!core.using_advBiome)
+        if (!Core.using_advBiome)
         {
             return;
         }
@@ -766,7 +772,7 @@ public class mapData : IExposable
                 i -= ar_b.Count;
             }
 
-            if (!core.ar_b_no.Contains(ar_b[i]))
+            if (!Core.ar_b_no.Contains(ar_b[i]))
             {
                 break;
             }
@@ -779,14 +785,14 @@ public class mapData : IExposable
     {
         var b = m.Biome;
         var ar_tmp = new List<BiomeDef>();
-        ar_tmp.AddRange(core.ar_b);
+        ar_tmp.AddRange(Core.ar_b);
         var ar_tmp2 = new List<BiomeDef>();
 
         ar_tmp.Remove(b);
 
         while (ar_tmp.Count > 0)
         {
-            i = Rand.RangeSeeded(0, ar_tmp.Count, Find.World.ConstantRandSeed + core.tickGame);
+            i = Rand.RangeSeeded(0, ar_tmp.Count, Find.World.ConstantRandSeed + Core.tickGame);
             ar_tmp2.Add(ar_tmp[i]);
             ar_tmp.RemoveAt(i);
         }
@@ -797,7 +803,7 @@ public class mapData : IExposable
         // test
         //ar_tmp2[0] = BiomeDefOf.Desert;
         //ar_tmp2[1] = BiomeDefOf.SeaIce;
-        if (!core.val_testMode)
+        if (!Core.val_testMode)
         {
             return ar_tmp2;
         }
@@ -805,7 +811,7 @@ public class mapData : IExposable
         Log.Message("-----------map biome-------------");
         foreach (var b2 in ar_tmp2)
         {
-            Log.Message($"({core.ar_b.IndexOf(b2)}){b2.label} def : {b2.defName}");
+            Log.Message($"({Core.ar_b.IndexOf(b2)}){b2.label} def : {b2.defName}");
         }
 
         Log.Message("------------------------");
@@ -937,7 +943,7 @@ public class mapData : IExposable
     }
 
 
-    protected virtual bool TryFindScatterCell(Map map, out IntVec3 result)
+    private bool TryFindScatterCell(Map map, out IntVec3 result)
     {
         return CellFinderLoose.TryFindRandomNotEdgeCellWith(5, CanScatterAt, map, out result);
 
@@ -949,7 +955,7 @@ public class mapData : IExposable
     }
 
 
-    protected void ScatterAt(IntVec3 intVec3, Map map, int stackCount = 1)
+    private void ScatterAt(IntVec3 intVec3, Map map)
     {
         var thingDef = ChooseThingDef();
         if (thingDef == null)
@@ -965,7 +971,7 @@ public class mapData : IExposable
     }
 
 
-    protected ThingDef ChooseThingDef()
+    private ThingDef ChooseThingDef()
     {
         if (genStep_ScatterLumpsMineable.forcedDefToScatter != null)
         {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
@@ -18,9 +17,6 @@ public static class GenRadial
 
     private static float[] RadialPatternRadii;
 
-    private static List<IntVec3> tmpCells;
-
-    private static bool working;
     private static int setupTryCount;
     private static bool isSetuped;
 
@@ -53,8 +49,6 @@ public static class GenRadial
         ManualRadialPattern = new IntVec3[49];
         RadialPattern = new IntVec3[RadialPatternCount];
         RadialPatternRadii = new float[RadialPatternCount];
-        tmpCells = new List<IntVec3>();
-        working = false;
         SetupManualRadialPattern();
         SetupRadialPattern();
         RadialPattern_r = RadialPattern;
@@ -306,7 +300,7 @@ public static class GenRadial
                 {
                     if (returnedThings == null)
                     {
-                        returnedThings = new HashSet<Thing>();
+                        returnedThings = [];
                     }
 
                     if (!returnedThings.Add(thing))
@@ -317,56 +311,6 @@ public static class GenRadial
 
                 yield return thing;
             }
-        }
-    }
-
-    public static void ProcessEquidistantCells(IntVec3 center, float radius, Func<List<IntVec3>, bool> processor,
-        Map map = null)
-    {
-        if (working)
-        {
-            Log.Error("Nested calls to ProcessEquidistantCells() are not allowed.");
-            return;
-        }
-
-        tmpCells.Clear();
-        working = true;
-        try
-        {
-            var num = -1f;
-            var num2 = NumCellsInRadius(radius);
-            for (var i = 0; i < num2; i++)
-            {
-                var intVec = center + RadialPattern[i];
-                if (map != null && !intVec.InBounds(map))
-                {
-                    continue;
-                }
-
-                float num3 = intVec.DistanceToSquared(center);
-                if (Mathf.Abs(num3 - num) > 0.0001f)
-                {
-                    if (tmpCells.Any() && processor(tmpCells))
-                    {
-                        return;
-                    }
-
-                    num = num3;
-                    tmpCells.Clear();
-                }
-
-                tmpCells.Add(intVec);
-            }
-
-            if (tmpCells.Any())
-            {
-                processor(tmpCells);
-            }
-        }
-        finally
-        {
-            tmpCells.Clear();
-            working = false;
         }
     }
 }

@@ -4,10 +4,10 @@ using Verse;
 namespace YayoNature;
 
 [HarmonyPatch(typeof(Map), nameof(Map.ExposeData))]
-public class patch_map_exposeData
+public class Map_ExposeData
 {
     private static void Postfix(Map __instance)
     {
-        dataUtility.GetData(__instance).ExposeData();
+        DataUtility.GetData(__instance).ExposeData();
     }
 }

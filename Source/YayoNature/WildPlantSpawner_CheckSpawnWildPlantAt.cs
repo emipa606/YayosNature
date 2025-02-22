@@ -7,34 +7,27 @@ using Verse;
 namespace YayoNature;
 
 [HarmonyPatch(typeof(WildPlantSpawner), nameof(WildPlantSpawner.CheckSpawnWildPlantAt))]
-internal class Patch_WildPlantSpawner_CheckSpawnWildPlantAt
+internal class WildPlantSpawner_CheckSpawnWildPlantAt
 {
     private static Map map;
     private static mapData md;
-    
-    
 
-    [HarmonyPrefix]
     private static bool Prefix(WildPlantSpawner __instance, ref bool __result, IntVec3 c, float plantDensity,
         float wholeMapNumDesiredPlants, Map ___map)
     {
         map = ___map;
-        md = dataUtility.GetData(map);
+        md = DataUtility.GetData(map);
         if (md.change)
         {
             if (!md.get_dic_c_gen(c))
             {
                 return false;
             }
-            //plantDensity = 1f;
         }
         else
         {
             return true;
         }
-
-        //
-
 
         if (plantDensity <= 0f || c.GetPlant(map) != null || c.GetCover(map) != null || c.GetEdifice(map) != null ||
             map.fertilityGrid.FertilityAt(c) <= 0f || !PlantUtility.SnowAllowsPlanting(c, map))
@@ -50,7 +43,7 @@ internal class Patch_WildPlantSpawner_CheckSpawnWildPlantAt
             return false;
         }
 
-        
+
         __instance.CalculatePlantsWhichCanGrowAt(c, WildPlantSpawner.tmpPossiblePlants, cavePlants, plantDensity);
         if (!WildPlantSpawner.tmpPossiblePlants.Any())
         {
@@ -62,7 +55,8 @@ internal class Patch_WildPlantSpawner_CheckSpawnWildPlantAt
         WildPlantSpawner.tmpPossiblePlantsWithWeight.Clear();
         foreach (var thingDef in WildPlantSpawner.tmpPossiblePlants)
         {
-            var value = __instance.PlantChoiceWeight(thingDef, c, WildPlantSpawner.distanceSqToNearbyClusters, wholeMapNumDesiredPlants, plantDensity);
+            var value = __instance.PlantChoiceWeight(thingDef, c, WildPlantSpawner.distanceSqToNearbyClusters,
+                wholeMapNumDesiredPlants, plantDensity);
             WildPlantSpawner.tmpPossiblePlantsWithWeight.Add(new KeyValuePair<ThingDef, float>(thingDef, value));
         }
 
@@ -73,7 +67,7 @@ internal class Patch_WildPlantSpawner_CheckSpawnWildPlantAt
         }
 
         var plant = (Plant)ThingMaker.MakeThing(result.Key);
-        plant.Growth = Mathf.Clamp01(Rand.RangeSeeded(0.3f, 1f, core.tickGame));
+        plant.Growth = Mathf.Clamp01(Rand.RangeSeeded(0.3f, 1f, Core.tickGame));
         if (plant.def.plant.LimitedLifespan)
         {
             plant.Age = Rand.Range(0, Mathf.Max(plant.def.plant.LifespanTicks - 50, 0));
