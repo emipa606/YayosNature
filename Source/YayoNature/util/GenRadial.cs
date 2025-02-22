@@ -53,7 +53,7 @@ public static class GenRadial
         ManualRadialPattern = new IntVec3[49];
         RadialPattern = new IntVec3[RadialPatternCount];
         RadialPatternRadii = new float[RadialPatternCount];
-        tmpCells = [];
+        tmpCells = new List<IntVec3>();
         working = false;
         SetupManualRadialPattern();
         SetupRadialPattern();
@@ -306,7 +306,7 @@ public static class GenRadial
                 {
                     if (returnedThings == null)
                     {
-                        returnedThings = [];
+                        returnedThings = new HashSet<Thing>();
                     }
 
                     if (!returnedThings.Add(thing))

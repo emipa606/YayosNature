@@ -20,9 +20,9 @@ public class mapData : IExposable
     public BiomeDef _prev_biome;
 
 
-    private List<float> ar_elevation = [];
-    private List<float> ar_fertility = [];
-    private List<RoofThreshold> ar_roof = [];
+    private List<float> ar_elevation = new List<float>();
+    private List<float> ar_fertility = new List<float>();
+    private List<RoofThreshold> ar_roof = new List<RoofThreshold>();
     private IntVec3 c = new IntVec3(0, 0, 0);
 
 
@@ -238,15 +238,8 @@ public class mapData : IExposable
             return;
         }
 
-        if (ar_elevation == null)
-        {
-            ar_elevation = [];
-        }
-
-        if (ar_fertility == null)
-        {
-            ar_fertility = [];
-        }
+        if (ar_elevation == null) ar_elevation = new List<float>();
+        if (ar_fertility == null) ar_fertility = new List<float>();
     }
 
     public void setParent(Map _m)
@@ -322,12 +315,8 @@ public class mapData : IExposable
         var gs_elevationFertility = ar_genStepWithParams.Find(a => a.def.genStep is GenStep_ElevationFertility);
         gs_elevationFertility.def?.genStep.Generate(m, gs_elevationFertility.parms);
 
-        fertility =
-            AccessTools.PropertyGetter(typeof(MapGenerator), "Fertility").Invoke(null, []) as
-                MapGenFloatGrid;
-        elevation =
-            AccessTools.PropertyGetter(typeof(MapGenerator), "Elevation").Invoke(null, []) as
-                MapGenFloatGrid;
+        fertility = MapGenerator.Fertility;
+        elevation = MapGenerator.Elevation;
     }
 
 
@@ -389,7 +378,7 @@ public class mapData : IExposable
             RockNoises.Init(m);
 
             var num = 0.7f;
-            ar_roof = [];
+            ar_roof = new List<RoofThreshold>();
             var roofThreshold = new RoofThreshold
             {
                 roofDef = RoofDefOf.RoofRockThick,
@@ -431,9 +420,7 @@ public class mapData : IExposable
             genStep_ScatterLumpsMineable.countPer10kCellsRange = new FloatRange(num3, num3);
             genStep_ScatterLumpsMineable.minSpacing = 5f;
             genStep_ScatterLumpsMineable.warnOnFail = false;
-            //int num4 = genStep_ScatterLumpsMineable.CalculateFinalCount(m);
-            if (AccessTools.Method(typeof(GenStep_Scatterer), "CalculateFinalCount")
-                    .Invoke(genStep_ScatterLumpsMineable, [m]) is int num4)
+            int num4 = genStep_ScatterLumpsMineable.CalculateFinalCount(m);
             {
                 for (var index = 0; index < (int?)num4; index++)
                 {
@@ -565,8 +552,7 @@ public class mapData : IExposable
         }
         else
         {
-            SetTerrain(c, terrainDef, m, m.terrainGrid.topGrid,
-                Traverse.Create(m.terrainGrid).Field("underGrid").GetValue<TerrainDef[]>());
+            SetTerrain(c, terrainDef, m, m.terrainGrid.topGrid, m.terrainGrid.underGrid);
         }
 
 
@@ -702,7 +688,6 @@ public class mapData : IExposable
         }
 
         topGrid[num] = newTerr;
-        //AccessTools.Method(typeof(TerrainGrid), "DoTerrainChangedEffects").Invoke(map.terrainGrid, new object[] { c });
         DoTerrainChangedEffects(intVec3, map);
 
 
@@ -754,7 +739,7 @@ public class mapData : IExposable
         }
 
         map.pathing.RecalculatePerceivedPathCostAt(intVec3);
-        var drawerInt = Traverse.Create(map.terrainGrid).Field("drawerInt").GetValue<CellBoolDrawer>();
+        var drawerInt = map.terrainGrid.drawerInt;
         drawerInt?.SetDirty();
 
         map.fertilityGrid.Drawer.SetDirty();
