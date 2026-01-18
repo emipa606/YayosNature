@@ -85,7 +85,7 @@ public class worldData : IExposable
         var ar_tmp2 = (from b in DefDatabase<BiomeDef>.AllDefs where b.canBuildBase select b).ToList();
         foreach (var b in ar_tmp2)
         {
-            foreach (var t in Find.WorldGrid.tiles)
+            foreach (var t in Find.WorldGrid.Tiles)
             {
                 if (t.biome != b)
                 {
@@ -113,7 +113,7 @@ public class worldData : IExposable
         for (i = 0; i < ar_b.Count; i++)
         {
             var count = 0;
-            foreach (var t in Find.WorldGrid.tiles)
+            foreach (var t in Find.WorldGrid.Tiles)
             {
                 if (t.biome != ar_b[i])
                 {

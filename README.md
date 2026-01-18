@@ -1,12 +1,12 @@
-# [Yayo's Nature (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=3006875291)
+# [[Abandoned] Yayo's Nature (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=3006875291)
 
-![Image](https://i.imgur.com/buuPQel.png)
+![Image](https://img.litet.net/logos/Info.png)
 
 Update of YAYOs mod https://steamcommunity.com/sharedfiles/filedetails/?id=2558409397
 
-![Image](https://i.imgur.com/pufA0kM.png)
+![Image](https://img.litet.net/logos/Abandoned.png)
 	
-![Image](https://i.imgur.com/Z4GOv8H.png)
+![Image](https://img.litet.net/logos/OriginalDescription.png)
 
 # **# The colony's biome changes every 60 days. (can edit in option)**
 
@@ -24,18 +24,18 @@ Update of YAYOs mod https://steamcommunity.com/sharedfiles/filedetails/?id=25584
 
 - This is a real play capture.
 
-![Image](https://imgur.com/wXaSiuh.png)
+![Image](https://img.litet.net/wXaSiuh.png)
 
-![Image](https://imgur.com/kDYv8uV.png)
+![Image](https://img.litet.net/kDYv8uV.png)
 
 
 # **# mountain change(default : off, turn on in option)**
 
-![Image](https://imgur.com/1hLtpEX.png)
+![Image](https://img.litet.net/1hLtpEX.png)
 
 
 [ Yayo's Youtube](https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w)
-[![Image](https://imgur.com/vGVHUDk.png)](https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w)
+[![Image](https://img.litet.net/vGVHUDk.png)](https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w)
 The latest news about my mods are posted on YouTube.
 Subscribe to YouTube and be the first to know.
 
@@ -44,7 +44,7 @@ Subscribe to YouTube and be the first to know.
 
 - Turn off biomes you don't want.
 
-![Image](https://imgur.com/EXRUFRp.png)
+![Image](https://img.litet.net/EXRUFRp.png)
 
 
 # **# Caution!**
@@ -70,13 +70,13 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2052116426
 **Please take this mod and modify it. The source code is included.
 I'd love to see variations come out with various ideas.**
 
-![Image](https://i.imgur.com/PwoNOj4.png)
+![Image](https://img.litet.net/logos/ReportingIssues.png)
 
 
 
 -  See if the the error persists if you just have this mod and its requirements active.
 -  If not, try adding your other mods until it happens again.
--  Post your error-log using [HugsLib](https://steamcommunity.com/workshop/filedetails/?id=818773962) or the standalone [Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) and command Ctrl+F12
+-  Always post your log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404)
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
@@ -84,4 +84,4 @@ I'd love to see variations come out with various ideas.**
 
  
 
-[![Image](https://img.shields.io/github/v/release/emipa606/YayosNature?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/3006875291) | tags:  biome options,  planet modifications
+[![Image](https://img.shields.io/github/v/release/emipa606/YayosNature?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/3006875291) | tags: biome options, planet modifications

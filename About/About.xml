@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-  <name>Yayo's Nature (Continued)</name>
+  <name>[Abandoned] Yayo's Nature (Continued)</name>
   <packageId>Mlie.YayosNature</packageId>
   <author>YAYO</author>
   <url>https://github.com/emipa606/YayosNature</url>
@@ -8,6 +8,7 @@
     <li>1.3</li>
     <li>1.4</li>
     <li>1.5</li>
+    <li>1.6</li>
   </supportedVersions>
   <modDependencies>
     <li>
@@ -27,21 +28,21 @@
     <li>brrainz.harmony</li>
     <li>UnlimitedHugs.HugsLib</li>
   </loadAfter>
-  <description>[img]https://i.imgur.com/buuPQel.png[/img]
+  <description>[img]https://img.litet.net/logos/Info.png[/img]
 Update of YAYOs mod https://steamcommunity.com/sharedfiles/filedetails/?id=2558409397
 
-[img]https://i.imgur.com/pufA0kM.png[/img]
+[img]https://img.litet.net/logos/Abandoned.png[/img]
 
 [table]
-    [tr][td][url=https://dsc.gg/mlie][img]https://i.imgur.com/zdzzBrc.png[/img][/url][/td] [td][url=https://github.com/emipa606/YayosNature][img]https://i.imgur.com/kTkpTOE.png[/img][/url][/td]
+    [tr][td][url=https://discord.gg/h5TY6DA][img]https://img.litet.net/logos/Discord.png[/img][/url][/td] [td][url=https://github.com/emipa606/YayosNature][img]https://img.litet.net/logos/Github.png[/img][/url][/td]
     [/tr]
     [tr]
-        [td][img]https://i.imgur.com/WjDSfUn.png[/img][/td]
-        [td][img]https://i.imgur.com/Be8E2qJ.png[/img][/td]
+        [td][img]https://img.litet.net/logos/SafeToAdd.png[/img][/td]
+        [td][img]https://img.litet.net/logos/RemoveMayWork.png[/img][/td]
     [/tr]
 [/table]
 	
-[img]https://i.imgur.com/Z4GOv8H.png[/img]
+[img]https://img.litet.net/logos/OriginalDescription.png[/img]
 [h1][b]# The colony's biome changes every 60 days. (can edit in option)[/b][/h1]
 - Tile, Animals, plants, temperature change
 - Not destroy : Constructed floors, buildings, anima trees, sea, river, water(option)
@@ -55,17 +56,17 @@ Update of YAYOs mod https://steamcommunity.com/sharedfiles/filedetails/?id=25584
 [h1][b]# The entire map changes over about 12 days[/b][/h1]
 - This is a real play capture.
 
-[img]https://imgur.com/wXaSiuh.png[/img]
+[img]https://img.litet.net/wXaSiuh.png[/img]
 
-[img]https://imgur.com/kDYv8uV.png[/img]
+[img]https://img.litet.net/kDYv8uV.png[/img]
 
 
 [h1][b]# mountain change(default : off, turn on in option)[/b][/h1]
-[img]https://imgur.com/1hLtpEX.png[/img]
+[img]https://img.litet.net/1hLtpEX.png[/img]
 
 
 [url=https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w] Yayo's Youtube[/url]
-[url=https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w][img]https://imgur.com/vGVHUDk.png[/img][/url]
+[url=https://www.youtube.com/channel/UCfrw-AKo2Ax-TnDXNmhE28w][img]https://img.litet.net/vGVHUDk.png[/img][/url]
 The latest news about my mods are posted on YouTube.
 Subscribe to YouTube and be the first to know.
 
@@ -73,7 +74,7 @@ Subscribe to YouTube and be the first to know.
 [h1][b]# Options[/b][/h1]
 - Turn off biomes you don't want.
 
-[img]https://imgur.com/EXRUFRp.png[/img]
+[img]https://img.litet.net/EXRUFRp.png[/img]
 
 
 [h1][b]# Caution![/b][/h1]
@@ -97,17 +98,17 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2052116426
 [b]Please take this mod and modify it. The source code is included.
 I'd love to see variations come out with various ideas.[/b]
 
-[img]https://i.imgur.com/PwoNOj4.png[/img]
+[img]https://img.litet.net/logos/ReportingIssues.png[/img]
 [list]
 [*] See if the the error persists if you just have this mod and its requirements active.
 [*] If not, try adding your other mods until it happens again.
-[*] Post your error-log using [url=https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib[/url] or the standalone [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404]Uploader[/url] and command Ctrl+F12
+[*] Always post your log using the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404]Log Uploader[/url]
 [*] For best support, please use the Discord-channel for error-reporting.
 [*] Do not report errors by making a discussion-thread, I get no notification of that.
 [*] If you have the solution for a problem, please post it to the GitHub repository.
 [*] Use [url=https://github.com/RimSort/RimSort/releases/latest]RimSort[/url] to sort your mods
 [/list] 
 
-[url=https://steamcommunity.com/sharedfiles/filedetails/changelog/3006875291][img]https://img.shields.io/github/v/release/emipa606/YayosNature?label=latest%20version&amp;style=plastic&amp;color=9f1111&amp;labelColor=black[/img][/url] | tags:  biome options,  planet modifications</description>
-  <modVersion IgnoreIfNoMatchingField="True">1.5.1</modVersion>
+[url=https://steamcommunity.com/sharedfiles/filedetails/changelog/3006875291][img]https://img.shields.io/github/v/release/emipa606/YayosNature?label=latest%20version&amp;style=plastic&amp;color=9f1111&amp;labelColor=black[/img][/url] | tags: biome options, planet modifications</description>
+  <modVersion IgnoreIfNoMatchingField="True">1.6.0</modVersion>
 </ModMetaData>

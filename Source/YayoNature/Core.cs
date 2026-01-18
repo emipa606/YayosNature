@@ -238,12 +238,11 @@ public class Core : ModBase
     public static void resetPlanet(bool render = false)
     {
         var worldGenStepTerrain = new WorldGenStep_Terrain();
-        _ = Find.WorldGrid.tiles;
+        _ = Find.WorldGrid.Tiles;
 
-        foreach (var t in Find.WorldGrid.tiles)
+        foreach (var surfaceTile in Find.WorldGrid.Tiles)
         {
-            i = Find.WorldGrid.tiles.IndexOf(t);
-            t.biome = worldGenStepTerrain.BiomeFrom(t, i);
+            surfaceTile.biome = worldGenStepTerrain.BiomeFrom(surfaceTile, surfaceTile.tile, PlanetLayer.Selected);
         }
 
         DataUtility.GetData(Current.Game.World).ar_b = null;
@@ -255,7 +254,13 @@ public class Core : ModBase
 
         if (render)
         {
-            (Find.World.renderer.layers.Find(a => a is WorldLayer_Terrain) as WorldLayer_Terrain)?.RegenerateNow();
+            foreach (var drawLayer in Find.World.renderer.AllDrawLayers)
+            {
+                if (drawLayer is WorldDrawLayer_Terrain terrain)
+                {
+                    terrain.RegenerateNow();
+                }
+            }
         }
 
 
